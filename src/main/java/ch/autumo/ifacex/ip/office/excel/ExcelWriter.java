@@ -27,6 +27,8 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ch.autumo.ifacex.Constants;
 import ch.autumo.ifacex.IPC;
@@ -43,16 +45,23 @@ import ch.autumo.ifacex.writer.Writer;
  */
 public class ExcelWriter implements Writer {
 
+	private final static Logger LOG = LoggerFactory.getLogger(ExcelWriter.class.getName());
+	
 	private String outputFile = null;
 	private String fields[] = null;
 	
 	private WriterMapping mapping = null;
 	
 	private SXSSFWorkbook workbook = null;
+	private Sheet sheet = null;
+	
+	private int streamBufferSize = 1000;
 	
 	
 	@Override
 	public void initialize(String rwName, IPC config, Processor processor) throws IfaceXException {
+		
+		streamBufferSize = config.getWriterConfig(rwName).getNumber("_buffer_size", 1000);
 	}
 
 	@Override
@@ -69,50 +78,39 @@ public class ExcelWriter implements Writer {
 			fields = entity.getSourceFields();
 		else
 			fields = mapping.getAllFields();
+		
+		workbook = new SXSSFWorkbook(streamBufferSize);
+		sheet = workbook.createSheet(entity.getEntity());
 	}
 
 	@Override
 	public void writeHeader(String writerName, IPC config, SourceEntity entity) throws IfaceXException {
 		
-		workbook = new SXSSFWorkbook(1);
-		
 		try {
-			
-			final Sheet sheet = workbook.createSheet(entity.getEntity());            
-			final Row headerRow = sheet.createRow(0);       
+			final Row headerRow = sheet.createRow(0);
+			final CellStyle headerCellStyle = this.setHeaderCellStyle(workbook);
 
 			Integer index = 0; 
 			for (String field : fields) { 
 				if (field != null && field.trim().length() != 0) {
-					this.createCell(headerRow, index, field, this.setHeaderCellStyle(workbook));
+					this.createCell(headerRow, index, field, headerCellStyle);
 					index++; 
 				}
 			} 
-		     
-			final FileOutputStream out = new FileOutputStream(outputFile, true);
-			workbook.write(out);
 			
 	     } catch (Exception e) {
 	    	 throw new IfaceXException("Couldn't write excel workbook header!", e);
-	     } finally {
-	    	 if (workbook != null)
-	    		 workbook.dispose();
-	     }		
+	     }	
 	}
 
 	@Override
 	public void writeBatchData(String writerName, IPC config, BatchData batch, SourceEntity entity)
 			throws IfaceXException {
 		
-		workbook = new SXSSFWorkbook(1);
-		
 		try {
-			
-			final Sheet sheet = workbook.createSheet(entity.getEntity());
 			final CellStyle cellStyle = this.setExcelBodyCellStyle(workbook);
 			
 			int rowNum = sheet.getLastRowNum() + 1;
-			
 			while (batch.hasNext()) {
 				
 				final Row row = sheet.createRow(rowNum);
@@ -127,30 +125,37 @@ public class ExcelWriter implements Writer {
 				rowNum++;
 			}
 			
-			final FileOutputStream out = new FileOutputStream(outputFile, true);
-			workbook.write(out);
-			
 		} catch (Exception e) {
 			throw new IfaceXException("Couldn't write excel workbook data!", e);
-		} finally {
-			if (workbook != null)
-				workbook.dispose();
 		}
 	}
 
 	@Override
 	public void close(String rwName) throws IfaceXException {
-		if (workbook != null)
+		
+		if (workbook != null) {
 			try {
-				workbook.close();
-			} catch (IOException e1) {
-			}	    	 
+				
+				final FileOutputStream out = new FileOutputStream(outputFile);
+				workbook.write(out);
+				
+				out.flush();
+				out.close();
+				
+				if (!workbook.dispose())
+					LOG.warn("Couldn't dispose temporary excel files!");
+				
+			} catch (IOException e) {
+				LOG.error("Couldn't write final excel file '"+outputFile+"'!", e);
+			}
+		}
 	}
 	
-	private void createCell(Row row, Integer index, String field, CellStyle cellStyle) {
+	private void createCell(Row row, Integer index, String value, CellStyle cellStyle) {
 		final Cell cell = row.createCell(index.intValue());
-		cell.setCellStyle(cellStyle);
-		cell.setCellValue(field); // string
+		if (cellStyle != null)
+			cell.setCellStyle(cellStyle);
+		cell.setCellValue(value); // string
 	}
 
 	private CellStyle setHeaderCellStyle(SXSSFWorkbook workbook) {

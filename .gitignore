@@ -1,1 +1,6 @@
 /target/
+/lic/
+/log/
+/data/
+/files/
+**/.DS_Store

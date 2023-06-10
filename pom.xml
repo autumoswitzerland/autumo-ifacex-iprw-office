@@ -76,6 +76,44 @@
 			    </executions>
 			</plugin>
 			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>3.1.0</version>
+				<executions>
+				    <execution>
+				        <phase>clean</phase>
+				        <goals>
+				            <goal>run</goal>
+				        </goals>
+				        <configuration>
+				            <target>
+				                <delete>
+				                    <fileset dir="${basedir}/lib" includes="*.jar" />
+				                </delete>
+				            </target>
+				        </configuration>
+				    </execution>
+				</executions>
+			</plugin>			
+			
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+			                <includeScope>provided</includeScope>
+			                <excludeScope>compile</excludeScope>
+							<outputDirectory>${basedir}/lib</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+						
 		</plugins>
 	</build>
 	
@@ -103,8 +141,15 @@
 		</dependency>
 		
 				
-		<!-- Document libraries -->
+		<!-- Deps -->
 	
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.7.36</version>
+		    <scope>provided</scope>
+		</dependency>
+
 		<dependency>
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi</artifactId>
@@ -119,22 +164,6 @@
 		    <scope>provided</scope>
 		</dependency>
 
-		<dependency>
-		    <groupId>org.apache.poi</groupId>
-		    <artifactId>poi-scratchpad</artifactId>
-		    <version>5.2.3</version>
-		    <scope>provided</scope>
-		</dependency>
-
-		
-		<!-- Testing -->
-				
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
 		
 	</dependencies>
 	

@@ -1,0 +1,51 @@
+
+###############################################################################
+# General configuration
+###############################################################################
+
+source_interface=csv_in
+destination_interfaces=excel_out
+# In this case, you define one pseudo entity, that defines in which
+# directory files should be read and processed as source entities
+# for the 'file_in'-reader
+process_source_entities=data
+
+
+
+###############################################################################
+# CSV reader configuration
+###############################################################################
+
+# Header size, 0 = no header
+# If there are more than one header, it is assumed that field name are in the last header line!
+csv_in_header_size=1
+
+# Delete CSV files after reading ?
+# Values: Yes or No
+csv_in_delete_files_after_processing=no
+
+# Entity fields -> if 'csv_in_header_size' > 0, the CSV header is used instead, otherwise this field names are used
+#csv_in_<entity1>_fields=
+
+# Read the output files from writer 'csv_out';
+# If the value would be 'csv_out', then 'csv_out_<entity>.csv' are read!
+csv_in_read_from_writer=
+
+# Read from custom folder; only when above 'csv_in_read_from_writer'
+# isn't defined. Files must be named '<entity>.csv'.
+# If the above parameter and this one isn't defined, then the default
+# folder is used; see 'ifacex.cfg', parameter 'files_folder'.
+csv_in_read_from_folder=
+
+
+
+###############################################################################
+# Excel writer configuration
+###############################################################################
+
+# Excel file streaming buffer size.
+excel_out_buffer_size=1000
+
+# No mapping
+
+
