@@ -4,3 +4,5 @@
 /data/
 /files/
 **/.DS_Store
+/distribute.sh
+/product/

@@ -2,7 +2,7 @@
 
 ###############################################################################
 #
-#  autumo ifaceX Additional Reader/Writer packager.
+#  autumo ifaceX Office Reader/Writer packager.
 #  Version: 1.0
 #
 #  Notes:
