@@ -3,7 +3,7 @@
 ###############################################################################
 #
 #  autumo ifaceX Office Reader/Writer packager.
-#  Version: 1.0
+#  Version: 1.1
 #
 #  Notes:
 #   -
@@ -11,7 +11,7 @@
 #------------------------------------------------------------------------------
 #
 #  2023 autumo GmbH
-#  Date: 01.03.2023
+#  Date: 07.12.2023
 #
 ###############################################################################
 
@@ -19,7 +19,7 @@
 
 
 # VARS
-IPRW_OFFICE_VERSION=1.0.0
+IPRW_OFFICE_VERSION=1.3.0
 
 
 
@@ -132,7 +132,7 @@ then
 	rm lib/commons-codec*
 	rm lib/commons-io*
 	rm lib/slf4j-api*
-
+	rm lib/log4j-api*
 	
 	
 	# COPY LICENSE
