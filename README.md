@@ -22,7 +22,10 @@ in your own project and IDE.
 3.	Comment out the corresponding readers and writers in the ifaceX
 	configuration 'cfg/interfaces.cfg'; see section 'Office Writers'.
 	This can be done in the ifaceX Studio too; see Menu 'Configuration' 
-	-> 'Interfaces Configuration'.
+	-> 'Interfaces Configuration'. if the section is missing, add:
+	
+		# Office Writers
+		excel_out=ch.autumo.ifacex.ip.office.excel.ExcelWriter
 
 ### Build
 
