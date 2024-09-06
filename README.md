@@ -13,7 +13,18 @@ repository.
 Of course, you can also just look at the source files and use what you need
 in your own project and IDE.
 
-### Install
+### Install: Plug into ifaceX
+
+1.	Export the ZIP archive.
+
+2.	Copy all libraries from the lib/ folder to the ifaceX-lib/ folder.
+
+3.	Comment out the corresponding readers and writers in the ifaceX
+	configuration 'cfg/interfaces.cfg'; see section 'Office Writers'.
+	This can be done in the ifaceX Studio too; see Menu 'Configuration' 
+	-> 'Interfaces Configuration'.
+
+### Build
 
 1.	You can Import the project in eclipse or in any other development IDE.
 
@@ -34,4 +45,3 @@ in your own project and IDE.
 ### Additional Office Readers | Writers
 
 - Excel Writer (XLSX)
-

@@ -135,6 +135,13 @@ then
 	rm lib/log4j-api*
 	
 	
+	# COPY Templates
+	
+	mkdir -p interfaces/examples
+	cp ../../interfaces/*.* interfaces/
+	cp ../../interfaces/examples/*.* interfaces/examples/
+
+	
 	# COPY LICENSE
 	cp ../../LICENSE.md .
 	# COPY README
