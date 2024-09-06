@@ -47,4 +47,4 @@ in your own project and IDE.
 
 ### Additional Office Readers | Writers
 
-- Excel Writer (XLSX)
+- Excel Writer (XLSX) : Writes excel files.
