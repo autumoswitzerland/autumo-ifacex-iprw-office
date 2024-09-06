@@ -46,3 +46,9 @@ mvn clean install
 ./make.sh create
 
 
+
+# -----------------------------
+# ---- Clean
+# -----------------------------
+
+mvn clean
