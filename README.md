@@ -1,6 +1,6 @@
 # README
 
-## autumo ifaceX - Additional Office Interface Processor Readers & Writers
+## autumo ifaceX - Additional Office Interface Processor Writers
 
 This is a maven eclipse project and serves consist of additional office autumo
 ifaceX Interface Processor (IP) Readers and Writers and is extending the core 
