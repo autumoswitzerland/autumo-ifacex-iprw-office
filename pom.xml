@@ -4,7 +4,7 @@
 
 	<groupId>ch.autumo.ifacex.iprw.office</groupId>
 	<artifactId>autumo-ifacex-iprw-office</artifactId>
-	<version>2.0.0</version>
+	<version>2.1.0</version>
 	<packaging>jar</packaging>
 
 	<name>autumo-ifacex-iprw-office</name>
