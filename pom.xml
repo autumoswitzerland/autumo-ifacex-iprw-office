@@ -4,7 +4,7 @@
 
 	<groupId>ch.autumo.ifacex.iprw.office</groupId>
 	<artifactId>autumo-ifacex-iprw-office</artifactId>
-	<version>2.1.0</version>
+	<version>3.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>autumo-ifacex-iprw-office</name>
@@ -31,7 +31,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${version.maven.compiler.plugin}</version>
 				<configuration>
-					<release>11</release>
+					<release>17</release>
 				</configuration>
 			</plugin>
 			
@@ -124,11 +124,12 @@
 		<version.maven.jar.plugin>3.4.2</version.maven.jar.plugin>
 		<version.maven.resources.plugin>3.3.1</version.maven.resources.plugin>
 		
-		<version.autumo.ifacex>2.1.0</version.autumo.ifacex>
-		<version.log4j.api>2.24.0</version.log4j.api>
-		<version.poi>5.2.0</version.poi>
-		<version.poi.ooxml>5.2.0</version.poi.ooxml>
-		<version.slf4j.api>1.7.36</version.slf4j.api>
+		<version.autumo.ifacex>3.0.0</version.autumo.ifacex>
+		<version.log4j.api>2.26.1</version.log4j.api>
+		<version.poi>5.5.1</version.poi>
+		<version.poi.ooxml>5.5.1</version.poi.ooxml>
+		<version.slf4j.api>2.0.17</version.slf4j.api>
+		<version.junit.jupiter>5.10.2</version.junit.jupiter>
 		
 	</properties>
 
@@ -182,6 +183,23 @@
 		    <artifactId>log4j-api</artifactId>
 		    <version>${version.log4j.api}</version>
 		    <scope>provided</scope>
+		</dependency>
+
+	
+		<!-- Testing -->
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${version.junit.jupiter}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${version.junit.jupiter}</version>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>

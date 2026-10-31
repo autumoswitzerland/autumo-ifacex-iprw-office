@@ -1,11 +1,28 @@
-
 ###############################################################################
-# Excel writer configuration
+#
+#  Title: 
+#  Version: 1.0
+#
+#  Notes:
+#   -
+#
+#------------------------------------------------------------------------------
+#
+#  Author: 
+#  Date: Sat Oct 31 16:44:35 CET 2026
+#
 ###############################################################################
 
-# Excel file streaming buffer size.
-excel_out_buffer_size=1000
+formatVersion: 1
 
-# No mapping
+general: {}
 
+sources: []
 
+destinations:
+  - name: excel_out
+
+    params:
+
+      # Excel file streaming buffer size.
+      buffer_size: "1000"

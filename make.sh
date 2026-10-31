@@ -3,15 +3,15 @@
 ###############################################################################
 #
 #  autumo ifaceX Office Reader/Writer packager.
-#  Version: 1.1
+#  Version: 1.2
 #
 #  Notes:
 #   -
 #
 #------------------------------------------------------------------------------
 #
-#  2024 autumo GmbH
-#  Date: 29.07.2024
+#  2025 autumo GmbH
+#  Date: 31.10.2026
 #
 ###############################################################################
 
@@ -19,7 +19,7 @@
 
 
 # VARS
-IPRW_OFFICE_VERSION=2.1.0
+IPRW_OFFICE_VERSION=3.0.0
 
 
 
@@ -131,14 +131,14 @@ then
 	# REMOVE ifaceX Doublettes
 	rm lib/commons-codec*
 	rm lib/commons-io*
-	rm lib/slf4j-api*
+	rm lib/slf4j2-api*
 	rm lib/log4j-api*
 	
 	
 	# COPY Templates
 	
 	mkdir -p interfaces/examples
-	cp ../../interfaces/*.* interfaces/
+	cp ../../interfaces/*.template interfaces/
 	cp ../../interfaces/examples/*.* interfaces/examples/
 
 	
