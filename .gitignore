@@ -6,3 +6,4 @@
 **/.DS_Store
 /distribute.sh
 /product/
+**/pom.xml.versionsBackup
