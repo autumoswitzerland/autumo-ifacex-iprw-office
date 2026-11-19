@@ -84,7 +84,6 @@ class ExcelWriterTest {
                 out.close();
             }
         } finally {
-            workbook.dispose();
             workbook.close();
         }
 

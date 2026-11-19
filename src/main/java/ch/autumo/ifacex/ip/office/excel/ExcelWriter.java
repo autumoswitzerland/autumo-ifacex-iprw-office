@@ -133,21 +133,32 @@ public class ExcelWriter implements Writer {
 	@Override
 	public void close(String rwName) throws IfaceXException {
 		
-		if (workbook != null) {
-			try {
-				
-				final FileOutputStream out = new FileOutputStream(outputFile);
-				workbook.write(out);
-				
-				out.flush();
-				out.close();
-				
-				if (!workbook.dispose())
-					LOG.warn("Couldn't dispose temporary excel files!");
-				
-			} catch (IOException e) {
-				LOG.error("Couldn't write final excel file '"+outputFile+"'!", e);
+		if (workbook == null) {
+			return;
+		}
+		
+		FileOutputStream out = null;
+		try {
+			out = new FileOutputStream(outputFile);
+			workbook.write(out);
+			out.flush();
+		} catch (IOException e) {
+			LOG.error("Couldn't write final excel file '" + outputFile + "'!", e);
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				} catch (IOException e) {
+					LOG.error("Couldn't close final excel file '" + outputFile + "'!", e);
+				}
 			}
+			try {
+				workbook.close();
+			} catch (IOException e) {
+				LOG.error("Couldn't close excel workbook!", e);
+			}
+			workbook = null;
+			sheet = null;
 		}
 	}
 	
